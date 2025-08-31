@@ -1,0 +1,54 @@
+:root {
+  --bg: #0f1220;
+  --fg: #e6e6e6;
+  --cyan: #4fd1c5;
+  --pink: #f472b6;
+  --yellow: #facc15;
+  --green: #34d399;
+  --red: #ef4444;
+  --panel: #161a2d;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+}
+
+#hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.side { background: var(--panel); padding: 8px 12px; border-radius: 8px; }
+.side h1 { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
+.side .stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4px 12px; font-size: 13px; }
+.stat-row { display: inline-flex; align-items: center; gap: 6px; }
+.stat-row .icon { font-size: 16px; line-height: 1; }
+.side .controls { margin-top: 6px; font-size: 12px; opacity: 0.9; }
+.left h1 { color: var(--pink); }
+.right h1 { color: var(--cyan); }
+
+#game { width: 100%; max-width: 1100px; margin: 6px auto 12px; background: #0a0d1a; border: 1px solid #1f2547; border-radius: 8px; display: block; }
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.45);
+}
+#overlay.hidden { display: none; }
+
+#overlay #message { background: var(--panel); padding: 16px 20px; border-radius: 10px; font-size: 20px; margin-bottom: 10px; text-align: center; }
+#overlay #restart { padding: 8px 14px; border-radius: 8px; border: 1px solid #334155; background: #111527; color: var(--fg); cursor: pointer; }
+#overlay #restart:hover { filter: brightness(1.2); }
+
+.legend { font-size: 12px; opacity: 0.8; }

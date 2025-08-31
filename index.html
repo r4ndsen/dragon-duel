@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dragon Duel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="hud">
+      <div class="side left">
+        <h1>Drachen (links)</h1>
+        <div class="stats">
+          <div>Basis HP: <span id="dragon-hp">-</span></div>
+          <div class="stat-row" title="Edelsteine"><span class="icon" aria-hidden="true">💎</span><span id="dragon-res">0</span></div>
+          <div class="stat-row" title="Häuser"><span class="icon" aria-hidden="true">🏠</span><span id="dragon-houses">0</span></div>
+          <div>Kapazität: <span id="dragon-capacity">0</span></div>
+          <div>Einheiten: <span id="dragon-pop">0</span></div>
+        </div>
+        <div class="controls">
+          <div><b>Angreifer:</b> Tasten: q w e r</div>
+          <div><b>Arbeiter:</b> Tasten: a s d f</div>
+          <div><b>Unterkunft:</b> Tasten: y x c</div>
+        </div>
+      </div>
+      <div class="side right">
+        <h1>Ritter (rechts)</h1>
+        <div class="stats">
+          <div>Basis HP: <span id="knight-hp">-</span></div>
+          <div class="stat-row" title="Gold"><span class="icon" aria-hidden="true">💰</span><span id="knight-res">0</span></div>
+          <div class="stat-row" title="Häuser"><span class="icon" aria-hidden="true">🏠</span><span id="knight-houses">0</span></div>
+          <div>Kapazität: <span id="knight-capacity">0</span></div>
+          <div>Einheiten: <span id="knight-pop">0</span></div>
+        </div>
+        <div class="controls">
+          <div><b>Angreifer:</b> Tasten: z u i o</div>
+          <div><b>Arbeiter:</b> Tasten: h j k l</div>
+          <div><b>Unterkunft:</b> Tasten: b n m</div>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="game" width="1100" height="420"></canvas>
+    <div id="overlay" class="hidden">
+      <div id="message"></div>
+      <button id="restart">Neustart</button>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+  </html>
