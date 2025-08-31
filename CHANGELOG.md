@@ -2,6 +2,10 @@
 
 Alle nennenswerten Änderungen dieses Projekts werden in dieser Datei dokumentiert.
 
+## [Unreleased]
+### Geändert
+- Upkeep für Arbeiter: bis 5 = 1, bis 10 = 2, danach je 5er‑Stufe Verdopplung (wirkt auf Netto‑Einkommen pro Sekunde)
+
 ## [1.0] - 2025-08-31
 ### Hinzugefügt
 - Erste spielbare Version (HTML/JS/Canvas)

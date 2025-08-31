@@ -32,6 +32,7 @@ body {
 .side .stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4px 12px; font-size: 13px; }
 .stat-row { display: inline-flex; align-items: center; gap: 6px; }
 .stat-row .icon { font-size: 16px; line-height: 1; }
+.sep { opacity: 0.6; }
 .side .controls { margin-top: 6px; font-size: 12px; opacity: 0.9; }
 .left h1 { color: var(--pink); }
 .right h1 { color: var(--cyan); }

@@ -7,13 +7,15 @@ const HUD = {
   dragonHP: document.getElementById('dragon-hp'),
   dragonRes: document.getElementById('dragon-res'),
   dragonHouses: document.getElementById('dragon-houses'),
-  dragonCapacity: document.getElementById('dragon-capacity'),
-  dragonPop: document.getElementById('dragon-pop'),
+  dragonPopCap: document.getElementById('dragon-popcap'),
+  dragonAttackers: document.getElementById('dragon-attackers'),
+  dragonWorkers: document.getElementById('dragon-workers'),
   knightHP: document.getElementById('knight-hp'),
   knightRes: document.getElementById('knight-res'),
   knightHouses: document.getElementById('knight-houses'),
-  knightCapacity: document.getElementById('knight-capacity'),
-  knightPop: document.getElementById('knight-pop'),
+  knightPopCap: document.getElementById('knight-popcap'),
+  knightAttackers: document.getElementById('knight-attackers'),
+  knightWorkers: document.getElementById('knight-workers'),
 };
 
 const overlay = document.getElementById('overlay');
@@ -58,6 +60,16 @@ const CONFIG = {
 
 // Utility
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+// Upkeep scales within tier so small worker counts still produce.
+// Example: 1..5 workers cost up to 1 total (linearly), 6..10 up to 2, then doubles per 5.
+const workerUpkeep = (count) => {
+  if (count <= 0) return 0;
+  const tier = Math.ceil(count / 5); // 1..5 -> 1, 6..10 -> 2, etc.
+  const tierMax = tier * 5;
+  const tierCost = Math.pow(2, tier - 1); // 1,2,4,8,... (maximum at tier cap)
+  const scale = count / tierMax; // linear within the tier
+  return tierCost * scale;
+};
 
 class Entity {
   constructor({ side }) {
@@ -288,11 +300,13 @@ function update(dt) {
   // Cull dead
   world.entities = world.entities.filter(e => e.alive);
 
-  // Income per worker
+  // Income per worker minus upkeep (tiered by worker count)
   const dWorkers = world.entities.filter(e => e.alive && e.type === 'worker' && e.side === 'dragon').length;
   const kWorkers = world.entities.filter(e => e.alive && e.type === 'worker' && e.side === 'knight').length;
-  world.resources.dragon.gems += dWorkers * CONFIG.income.workerPerSec * dt;
-  world.resources.knight.gold += kWorkers * CONFIG.income.workerPerSec * dt;
+  const dNet = dWorkers * CONFIG.income.workerPerSec - workerUpkeep(dWorkers);
+  const kNet = kWorkers * CONFIG.income.workerPerSec - workerUpkeep(kWorkers);
+  world.resources.dragon.gems = Math.max(0, world.resources.dragon.gems + dNet * dt);
+  world.resources.knight.gold = Math.max(0, world.resources.knight.gold + kNet * dt);
 
   // Win/Lose check
   if (world.dragonBaseHP <= 0 || world.knightBaseHP <= 0) {
@@ -309,10 +323,18 @@ function update(dt) {
   HUD.knightRes.textContent = String(Math.floor(world.resources.knight.gold));
   HUD.dragonHouses.textContent = String(world.houses.dragon);
   HUD.knightHouses.textContent = String(world.houses.knight);
-  HUD.dragonCapacity.textContent = String(world.capacity('dragon'));
-  HUD.knightCapacity.textContent = String(world.capacity('knight'));
-  HUD.dragonPop.textContent = String(world.population('dragon'));
-  HUD.knightPop.textContent = String(world.population('knight'));
+  const dCap = world.capacity('dragon');
+  const kCap = world.capacity('knight');
+  const dAtk = world.entities.filter(e => e.alive && e.side==='dragon' && e.type==='attacker').length;
+  const dWor = world.entities.filter(e => e.alive && e.side==='dragon' && e.type==='worker').length;
+  const kAtk = world.entities.filter(e => e.alive && e.side==='knight' && e.type==='attacker').length;
+  const kWor = world.entities.filter(e => e.alive && e.side==='knight' && e.type==='worker').length;
+  HUD.dragonPopCap.textContent = `${dAtk + dWor}/${dCap}`;
+  HUD.knightPopCap.textContent = `${kAtk + kWor}/${kCap}`;
+  HUD.dragonAttackers.textContent = String(dAtk);
+  HUD.dragonWorkers.textContent = String(dWor);
+  HUD.knightAttackers.textContent = String(kAtk);
+  HUD.knightWorkers.textContent = String(kWor);
 }
 
 function drawBackground() {

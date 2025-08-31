@@ -7,6 +7,7 @@ Ein kleines 2‑Spieler‑Lane-RTS im Browser (HTML5 Canvas). Links steuern die 
 - Basis‑HP, Lane‑Bewegung, kontinuierlicher Schaden bei Kontakt
 - Einheiten: Angreifer, Arbeiter; Gebäude: Unterkunft (Kapazität)
 - Ressourcen: Ritter erzeugen Gold, Drachen Edelsteine (je 1 pro Arbeiter/Sekunde)
+  - Upkeep (Arbeiter): bis 5 Arbeiter kostet insgesamt 1 Ressource/Sek., bis 10 insgesamt 2, danach verdoppelt es sich je weiterer 5er‑Stufe (4, 8, 16, …)
 - Kosten (symmetrisch): Angreifer 4, Arbeiter 6, Unterkunft 12
 - Kapazität: Start 5 Slots, pro Unterkunft +5
 - Sieg: Zerstöre die gegnerische Basis
