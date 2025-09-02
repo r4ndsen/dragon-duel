@@ -8,42 +8,66 @@
   </head>
   <body>
     <div id="hud">
+      <div class="topbar">
+        <select id="lang-select" title="Language" aria-label="Language">
+          <option value="de">🇩🇪</option>
+          <option value="en">🇬🇧</option>
+        </select>
+      </div>
       <div class="side left">
-        <h1>Drachen (links)</h1>
+        <h1><span data-i18n="app.dragons">Drachen</span> 🐲</h1>
         <div class="stats">
-          <div>Basis HP: <span id="dragon-hp">-</span></div>
-          <div class="stat-row" title="Edelsteine"><span class="icon" aria-hidden="true">💎</span><span id="dragon-res">0</span></div>
+          <div><span data-i18n="hud.baseHP">Basis HP</span>: <span id="dragon-hp">-</span></div>
+          <div class="stat-row" title="Edelsteine"><span class="icon" aria-hidden="true">💎</span><span id="dragon-res">0</span> <span class="rate" id="dragon-res-rate">(+0.0/s)</span></div>
           <div class="stat-row" title="Häuser"><span class="icon" aria-hidden="true">🏠</span><span id="dragon-houses">0</span></div>
-          <div>Einheiten: <span id="dragon-popcap">0/0</span></div>
-          <div class="stat-row" title="Einheiten-Aufteilung">
-            <span class="icon" aria-hidden="true">⚔️</span><span id="dragon-attackers">0</span>
+          <div><span data-i18n="hud.units">Einheiten</span>: <span id="dragon-popcap">0/0</span></div>
+          <div class="stat-row" title="Einheiten-Aufteilung" data-i18n-title="hud.unitBreakdown">
+            <span class="icon" aria-hidden="true">⚔️/🕵️/✨</span><span id="dragon-attackers">0</span>
             <span class="sep">·</span>
             <span class="icon" aria-hidden="true">🛠️</span><span id="dragon-workers">0</span>
           </div>
         </div>
         <div class="controls">
-          <div><b>Angreifer:</b> Tasten: q w e r</div>
-          <div><b>Arbeiter:</b> Tasten: a s d f</div>
-          <div><b>Unterkunft:</b> Tasten: y x c</div>
+          <div><b data-i18n="controls.upgradesLabel">Upgrades:</b> q = Angreifer, a = Arbeiter, y = Unterkunft</div>
+          <div><b data-i18n="controls.buildDragon">Angreifer/Dieb/Zauberer bauen:</b> w (Angr.) / e (Dieb) / r (Zaub.)</div>
+          <div><b>Arbeiter bauen:</b> s d f</div>
+          <div><b>Unterkunft bauen:</b> x c</div>
+        </div>
+        <div class="upgrades">
+          <div class="upgrade-row"><span class="key">q</span><span id="dragon-upg-attack">–</span></div>
+          <div class="upgrade-row"><span class="key">a</span><span id="dragon-upg-worker">–</span></div>
+          <div class="upgrade-row"><span class="key">y</span><span id="dragon-upg-house">–</span></div>
+          <div class="upgrade-row"><span class="key">⛨</span><span id="dragon-upg-base-repair" class="clickable" data-side="dragon" data-upg="base-repair">–</span></div>
+          <div class="upgrade-row"><span class="key">❤</span><span id="dragon-upg-base-hp" class="clickable" data-side="dragon" data-upg="base-hp">–</span></div>
+          <div class="upgrade-row"><span class="key">🛡️</span><span id="dragon-upg-base-armor" class="clickable" data-side="dragon" data-upg="base-armor">–</span></div>
         </div>
       </div>
       <div class="side right">
-        <h1>Ritter (rechts)</h1>
+        <h1><span data-i18n="app.knights">Ritter</span> 🏰</h1>
         <div class="stats">
-          <div>Basis HP: <span id="knight-hp">-</span></div>
-          <div class="stat-row" title="Gold"><span class="icon" aria-hidden="true">💰</span><span id="knight-res">0</span></div>
+          <div><span data-i18n="hud.baseHP">Basis HP</span>: <span id="knight-hp">-</span></div>
+          <div class="stat-row" title="Gold"><span class="icon" aria-hidden="true">💰</span><span id="knight-res">0</span> <span class="rate" id="knight-res-rate">(+0.0/s)</span></div>
           <div class="stat-row" title="Häuser"><span class="icon" aria-hidden="true">🏠</span><span id="knight-houses">0</span></div>
-          <div>Einheiten: <span id="knight-popcap">0/0</span></div>
-          <div class="stat-row" title="Einheiten-Aufteilung">
-            <span class="icon" aria-hidden="true">⚔️</span><span id="knight-attackers">0</span>
+          <div><span data-i18n="hud.units">Einheiten</span>: <span id="knight-popcap">0/0</span></div>
+          <div class="stat-row" title="Einheiten-Aufteilung" data-i18n-title="hud.unitBreakdown">
+            <span class="icon" aria-hidden="true">⚔️/🕵️/🏹</span><span id="knight-attackers">0</span>
             <span class="sep">·</span>
             <span class="icon" aria-hidden="true">🛠️</span><span id="knight-workers">0</span>
           </div>
         </div>
         <div class="controls">
-          <div><b>Angreifer:</b> Tasten: z u i o</div>
-          <div><b>Arbeiter:</b> Tasten: h j k l</div>
-          <div><b>Unterkunft:</b> Tasten: b n m</div>
+          <div><b data-i18n="controls.upgradesLabel">Upgrades:</b> z = Angreifer, h = Arbeiter, b = Unterkunft</div>
+          <div><b data-i18n="controls.buildKnight">Angreifer/Dieb/Bogenschütze bauen:</b> u (Angr.) / i (Dieb) / o (Bogen)</div>
+          <div><b>Arbeiter bauen:</b> j k l</div>
+          <div><b>Unterkunft bauen:</b> n m</div>
+        </div>
+        <div class="upgrades">
+          <div class="upgrade-row"><span class="key">z</span><span id="knight-upg-attack">–</span></div>
+          <div class="upgrade-row"><span class="key">h</span><span id="knight-upg-worker">–</span></div>
+          <div class="upgrade-row"><span class="key">b</span><span id="knight-upg-house">–</span></div>
+          <div class="upgrade-row"><span class="key">⛨</span><span id="knight-upg-base-repair" class="clickable" data-side="knight" data-upg="base-repair">–</span></div>
+          <div class="upgrade-row"><span class="key">❤</span><span id="knight-upg-base-hp" class="clickable" data-side="knight" data-upg="base-hp">–</span></div>
+          <div class="upgrade-row"><span class="key">🛡️</span><span id="knight-upg-base-armor" class="clickable" data-side="knight" data-upg="base-armor">–</span></div>
         </div>
       </div>
     </div>
@@ -51,9 +75,23 @@
     <canvas id="game" width="1100" height="420"></canvas>
     <div id="overlay" class="hidden">
       <div id="message"></div>
-      <button id="restart">Neustart</button>
+      <button id="restart" data-i18n="overlay.restart">Neustart</button>
     </div>
 
+    <script src="i18n/de.js"></script>
+    <script src="i18n/en.js"></script>
     <script src="main.js"></script>
+    <script>
+      // Initialize dropdown to current language and wire changes
+      document.addEventListener('DOMContentLoaded', function() {
+        var sel = document.getElementById('lang-select');
+        if (!sel || typeof window.setLang !== 'function') return;
+        try {
+          var cur = localStorage.getItem('lang') || 'de';
+          if ([...sel.options].some(o => o.value === cur)) sel.value = cur;
+        } catch (e) { /* ignore */ }
+        sel.addEventListener('change', function() { window.setLang(sel.value); });
+      });
+    </script>
   </body>
   </html>

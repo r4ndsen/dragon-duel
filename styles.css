@@ -27,12 +27,65 @@ body {
   padding: 8px 12px;
 }
 
+.topbar {
+  /* Float at the top-right above content */
+  position: fixed;
+  top: 8px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Minimal look */
+  background: transparent;
+  border: 0;
+  padding: 0;
+  z-index: 1000;
+  font-size: 12px;
+}
+
+#lang-select {
+  background: transparent;
+  color: var(--fg);
+  border: 0;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 20px;
+  line-height: 1;
+  width: auto;
+  min-width: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .side { background: var(--panel); padding: 8px 12px; border-radius: 8px; }
 .side h1 { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
 .side .stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4px 12px; font-size: 13px; }
 .stat-row { display: inline-flex; align-items: center; gap: 6px; }
 .stat-row .icon { font-size: 16px; line-height: 1; }
 .sep { opacity: 0.6; }
+.rate { opacity: 0.8; font-variant-numeric: tabular-nums; }
+
+/* Floating base-upgrade panel */
+.base-panel {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  background: var(--panel);
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-width: 260px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  z-index: 50;
+}
+.base-panel.right { left: auto; right: 16px; }
+.base-panel h2 { margin: 0 0 6px; font-size: 14px; color: #e5e7eb; }
+.base-panel .row { display: flex; align-items: center; gap: 8px; padding: 6px 4px; cursor: pointer; border-radius: 6px; }
+.base-panel .row:hover { background: #1b2040; }
+.base-panel .icon { width: 20px; text-align: center; }
+.base-panel .desc { font-size: 12px; }
 .side .controls { margin-top: 6px; font-size: 12px; opacity: 0.9; }
 .left h1 { color: var(--pink); }
 .right h1 { color: var(--cyan); }
@@ -53,3 +106,7 @@ body {
 #overlay #restart:hover { filter: brightness(1.2); }
 
 .legend { font-size: 12px; opacity: 0.8; }
+.upgrades { margin-top: 6px; font-size: 12px; }
+.upgrade-row { display: flex; gap: 8px; align-items: center; margin: 2px 0; }
+.upgrade-row .key { display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center; border: 1px solid #334155; border-radius: 4px; font-size: 11px; color: #cbd5e1; background: #0e1324; }
+.upgrade-row .clickable { cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
