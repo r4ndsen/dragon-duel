@@ -1,70 +1,72 @@
 # Dragon Duel
 
-Ein kleines, schnelles 2‑Spieler‑Lane‑RTS im Browser (HTML5 Canvas). Links spielen die Drachen, rechts die Ritter. Baue Einheiten, erweitere Kapazität, verbessere deine Seite mit Upgrades und zerstöre die gegnerische Basis.
+A small, fast 2‑player lane RTS in the browser (HTML5 Canvas). Dragons (left) fight Knights (right). Build units, expand capacity, purchase upgrades, and destroy the enemy base.
 
 ## Features
-- Zwei Fraktionen: Drachen (links) und Ritter (rechts)
-- Basis‑Lebenspunkte mit Ringanzeige; HP‑Text erscheint bei Schaden
-- Tick‑Combat: Angriffe schlagen in Intervallen zu (Nahkampf 1/s, Fernkampf 1.5/s)
-- Einheiten: Angreifer (Nahkampf), Arbeiter (Einkommen), Dieb (stehlt pro Treffer), Fernkämpfer (Zauberer/Bogenschütze) mit sichtbaren Projektilen
-- Gebäude: Unterkunft erhöht Kapazität (Start 5, +5 je Unterkunft; Upgrades können Slots erhöhen)
-- Ressourcen: Drachen sammeln Edelsteine (💎), Ritter Gold (💰); Einkommen wird pro Sekunde angezeigt
-- HUD: Icons für Ressourcen/Häuser, Einheitenübersicht (⚔️/🕵️/✨ bzw. 🏹) und Pop/Cap als `X/Y`
+- Two factions: Dragons (left) and Knights (right)
+- Base HP ring with numeric overlay when damaged
+- Tick combat: melee attacks at 1/sec, ranged at ~1/1.5 sec
+- Units: Attacker (melee), Worker (income), Thief (steals on hit), Ranged (Wizard/Archer) with visible projectiles
+- Buildings: House increases population cap (start 5, +5 per house; house upgrades add extra slots)
+- Resources: Dragons collect gems (💎), Knights collect gold (💰); income/sec shown in HUD
+- HUD: Resource/house icons, unit breakdown (⚔️/🕵️/✨ or 🏹), and pop/cap as `X/Y`
+- Language selector: flag dropdown at the top‑right (English/Deutsch), persists via localStorage
 
-## Wirtschaft
-- Einkommen (monoton steigend, abnehmender Grenzertrag):
-  - 1–5 Arbeiter: +1/s je Arbeiter
-  - 6–9 Arbeiter: +0.5/s je Arbeiter
-  - ab 10 Arbeiter: +0.2/s je Arbeiter
-- Diebe: erhalten bei jedem Treffer Ressourcen aus dem Gegner‑Pool (Floater „+x.x💰“), zusätzlich gibt jeder Kill noch +2 Ressourcen
-- Kills (alle Einheiten): +2 Ressourcen für die Seite, die tötet
+## Economy
+- Worker income (monotonic with diminishing returns):
+  - 1–5 workers: +1/sec each
+  - 6–9 workers: +0.5/sec each
+  - 10+ workers: +0.2/sec each
+- Thieves steal from the enemy pool on every successful hit (floating text shows “+x.x💰”), and all unit kills grant +2 resources to the killer’s side
+- Start with 1 free worker per side
 
 ## Upgrades
-- Fraktions‑Upgrades (Tasten):
-  - Drachen: `q` (Angreifer‑Schaden), `a` (Arbeiter‑Einkommen), `y` (Unterkunft‑Slots)
-  - Ritter: `z` (Angreifer‑Schaden), `h` (Arbeiter‑Einkommen), `b` (Unterkunft‑Slots)
-- Basis‑Upgrades (per Klick im HUD):
-  - Reparieren (⛨): wiederholbar, heilt sofort um einen festen Wert
-  - Erhöhte Lebensenergie (❤): erhöht Max‑HP (heilt um den Bonus)
-  - Erhöhte Panzerung (🛡️): verringert eingehenden Basisschaden
+- Faction upgrades (keys):
+  - Dragons: `q` (Attacker damage), `a` (Worker income), `y` (House slots)
+  - Knights: `z` (Attacker damage), `h` (Worker income), `b` (House slots)
+- Base upgrades (click):
+  - Repair (⛨): repeatable, heals a fixed amount instantly
+  - Max HP (❤): increases base max HP (also heals by the bonus)
+  - Armor (🛡️): reduces incoming base damage
+- Tip: Click a base on the canvas to open a floating base‑upgrade panel with the same actions.
 
-## Steuerung (Bauen)
-- Drachen (links):
-  - Angreifer: `w`
-  - Dieb: `e`
-  - Zauberer (Fernkampf): `r`
-  - Arbeiter: `s d f`
-  - Unterkunft: `x c`
-- Ritter (rechts):
-  - Angreifer: `u`
-  - Dieb: `i`
-  - Bogenschütze (Fernkampf): `o`
-  - Arbeiter: `j k l`
-  - Unterkunft: `n m`
+## Controls (Build)
+- Dragons (left):
+  - Attacker: `w`
+  - Thief: `e`
+  - Wizard (ranged): `r`
+  - Worker: `s d f`
+  - House: `x c`
+- Knights (right):
+  - Attacker: `u`
+  - Thief: `i`
+  - Archer (ranged): `o`
+  - Worker: `j k l`
+  - House: `n m`
 
-Hinweise
-- Arbeiter/Unterkunft haben kein Bau‑Delay; Kampfeinheiten haben eine kurze Abklingzeit
-- Fernkämpfer priorisieren Einheiten vor der Basis und feuern sichtbare Projektile
-- Basispanzerung reduziert Schaden; Reparieren ist beliebig oft möglich
+Notes
+- Build cooldowns: Attacker 250ms, Thief 250ms, Ranged 300ms, Worker 100ms, House 100ms
+- Ranged units prioritize enemy units before the base and fire visible projectiles
+- Base armor reduces damage; Repair is repeatable
 
-## Kosten (Standard)
-- Drachen (💎) / Ritter (💰):
-  - Angreifer: 4
-  - Dieb: 6
-  - Zauberer/Bogenschütze: 8
-  - Arbeiter: 6
-  - Unterkunft: 12
+## Costs (default)
+- Dragons (💎) / Knights (💰):
+  - Attacker: 4
+  - Thief: 6
+  - Wizard/Archer: 8
+  - Worker: 6
+  - House: 12
 
-## Starten
-- Öffne `index.html` direkt im Browser (Doppelklick). Keine Abhängigkeiten erforderlich.
-- Neustart nach Sieg/Niederlage: `[Enter]` oder Button „Neustart“.
+## Run
+- Open `index.html` directly in a browser (no dependencies)
+- Restart after win/lose: press `[Enter]` or click “Restart”
 
-## Dateien
-- `index.html` — Markup und HUD
-- `styles.css` — Layout/Styles
-- `main.js` — Spiel‑Logik, Rendering, Input
+## Files
+- `index.html` — HUD and markup
+- `styles.css` — Layout and styles
+- `main.js` — Game logic, rendering, input, i18n
 
-## Ideen / Nächste Schritte
-- Unterschiedliche Stats/Kosten je Fraktion, visuelle Treffer‑Effekte/Trails
-- Tooltips mit genauen Upgrade‑Werten im HUD
-- Soundeffekte, Balancing‑Feinschliff
+## Ideas / Next steps
+- Distinct stats/costs per faction; hit effects/trails
+- Tooltips with precise upgrade values in HUD
+- Sound effects; balance polish
